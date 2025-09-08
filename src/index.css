@@ -2,41 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Sistema de Design para Gestão Ótica - Cores médicas profissionais e modernas */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core - Azul médico profissional */
+    --background: 0 0% 99%;
+    --foreground: 216 27% 16%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Cards com sutis tons azulados */
+    --card: 210 40% 98%;
+    --card-foreground: 216 27% 16%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 40% 98%;
+    --popover-foreground: 216 27% 16%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Primary - Azul ótica profissional */
+    --primary: 209 100% 45%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 209 100% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Verde saúde */
+    --secondary: 148 38% 91%;
+    --secondary-foreground: 148 38% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Cinzas neutros */
+    --muted: 210 25% 96%;
+    --muted-foreground: 215 20% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Azul claro */
+    --accent: 209 90% 95%;
+    --accent-foreground: 209 90% 35%;
 
-    --destructive: 0 84.2% 60.2%;
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 355 100% 97%;
+    --warning: 32 95% 44%;
+    --warning-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders e inputs */
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: 209 100% 45%;
 
-    --radius: 0.5rem;
+    /* Layout */
+    --radius: 0.75rem;
+
+    /* Gradientes profissionais */
+    --gradient-primary: linear-gradient(135deg, hsl(209 100% 45%), hsl(209 100% 65%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 40% 98%), hsl(210 25% 96%));
+    --gradient-card: linear-gradient(135deg, hsl(210 40% 98%), hsl(209 90% 97%));
+
+    /* Sombras elegantes */
+    --shadow-sm: 0 1px 3px hsla(216 27% 16% / 0.1);
+    --shadow-md: 0 4px 12px hsla(216 27% 16% / 0.08);
+    --shadow-lg: 0 10px 30px hsla(216 27% 16% / 0.1);
+    --shadow-glow: 0 0 20px hsla(209 100% 45% / 0.3);
+
+    /* Animações suaves */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease-in-out;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +129,67 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Classes de utilidade customizadas */
+@layer utilities {
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-success {
+    background: var(--gradient-success);
+  }
+  
+  .bg-gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .shadow-elegant {
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-fast {
+    transition: var(--transition-fast);
+  }
+}
+
+/* Componentes customizados */
+@layer components {
+  .metric-card {
+    @apply bg-gradient-card border border-border/50 shadow-elegant transition-smooth hover:shadow-glow;
+  }
+  
+  .pipeline-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-md transition-smooth hover:shadow-lg;
+  }
+  
+  .funil-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-fast;
+  }
+  
+  .status-badge-success {
+    @apply bg-success/10 text-success border border-success/20;
+  }
+  
+  .status-badge-warning {
+    @apply bg-warning/10 text-warning border border-warning/20;
+  }
+  
+  .status-badge-primary {
+    @apply bg-primary/10 text-primary border border-primary/20;
   }
 }
