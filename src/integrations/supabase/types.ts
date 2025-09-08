@@ -14,7 +14,293 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      consultas: {
+        Row: {
+          created_at: string
+          data_consulta: string
+          id: string
+          lead_id: string
+          observacoes: string | null
+          prescricao: string | null
+          profissional_id: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data_consulta: string
+          id?: string
+          lead_id: string
+          observacoes?: string | null
+          prescricao?: string | null
+          profissional_id?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data_consulta?: string
+          id?: string
+          lead_id?: string
+          observacoes?: string | null
+          prescricao?: string | null
+          profissional_id?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultas_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultas_profissional_id_fkey"
+            columns: ["profissional_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fontes_lead: {
+        Row: {
+          ativo: boolean | null
+          created_at: string
+          descricao: string | null
+          id: string
+          nome: string
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome: string
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
+      historico_etapas: {
+        Row: {
+          alterado_por: string | null
+          created_at: string
+          etapa_anterior: string | null
+          etapa_nova: string | null
+          funil_anterior: number | null
+          funil_novo: number | null
+          id: string
+          lead_id: string
+          observacoes: string | null
+        }
+        Insert: {
+          alterado_por?: string | null
+          created_at?: string
+          etapa_anterior?: string | null
+          etapa_nova?: string | null
+          funil_anterior?: number | null
+          funil_novo?: number | null
+          id?: string
+          lead_id: string
+          observacoes?: string | null
+        }
+        Update: {
+          alterado_por?: string | null
+          created_at?: string
+          etapa_anterior?: string | null
+          etapa_nova?: string | null
+          funil_anterior?: number | null
+          funil_novo?: number | null
+          id?: string
+          lead_id?: string
+          observacoes?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historico_etapas_alterado_por_fkey"
+            columns: ["alterado_por"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "historico_etapas_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          data_agendamento: string | null
+          data_consulta: string | null
+          data_primeiro_contato: string | null
+          data_venda: string | null
+          email: string | null
+          etapa_atual: string | null
+          fonte_id: string | null
+          funil_atual: number | null
+          id: string
+          motivo_nao_comprou: string | null
+          nome: string
+          observacoes: string | null
+          status_final: string | null
+          updated_at: string
+          valor_orcamento: number | null
+          valor_venda: number | null
+          whatsapp: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          data_agendamento?: string | null
+          data_consulta?: string | null
+          data_primeiro_contato?: string | null
+          data_venda?: string | null
+          email?: string | null
+          etapa_atual?: string | null
+          fonte_id?: string | null
+          funil_atual?: number | null
+          id?: string
+          motivo_nao_comprou?: string | null
+          nome: string
+          observacoes?: string | null
+          status_final?: string | null
+          updated_at?: string
+          valor_orcamento?: number | null
+          valor_venda?: number | null
+          whatsapp?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          data_agendamento?: string | null
+          data_consulta?: string | null
+          data_primeiro_contato?: string | null
+          data_venda?: string | null
+          email?: string | null
+          etapa_atual?: string | null
+          fonte_id?: string | null
+          funil_atual?: number | null
+          id?: string
+          motivo_nao_comprou?: string | null
+          nome?: string
+          observacoes?: string | null
+          status_final?: string | null
+          updated_at?: string
+          valor_orcamento?: number | null
+          valor_venda?: number | null
+          whatsapp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_fonte_id_fkey"
+            columns: ["fonte_id"]
+            isOneToOne: false
+            referencedRelation: "fontes_lead"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      metas: {
+        Row: {
+          created_at: string
+          descricao: string | null
+          id: string
+          periodo_fim: string
+          periodo_inicio: string
+          profissional_id: string | null
+          tipo: string
+          updated_at: string
+          valor_atual: number | null
+          valor_meta: number
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          periodo_fim: string
+          periodo_inicio: string
+          profissional_id?: string | null
+          tipo: string
+          updated_at?: string
+          valor_atual?: number | null
+          valor_meta: number
+        }
+        Update: {
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          periodo_fim?: string
+          periodo_inicio?: string
+          profissional_id?: string | null
+          tipo?: string
+          updated_at?: string
+          valor_atual?: number | null
+          valor_meta?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "metas_profissional_id_fkey"
+            columns: ["profissional_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          ativo: boolean | null
+          cargo: string | null
+          created_at: string
+          email: string | null
+          id: string
+          nome: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ativo?: boolean | null
+          cargo?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ativo?: boolean | null
+          cargo?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          nome?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
